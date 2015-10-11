@@ -2,5 +2,5 @@
 
 int main() 
 {
-	std::cout << "ayye its the ";
+	std::cout << "Polynomial Tests";
 }
