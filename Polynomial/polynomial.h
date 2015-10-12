@@ -1,40 +1,41 @@
-#ifndef	POLYNOMIAL_H
+#ifndef POLYNOMIAL_H
 #define POLYNOMIAL_H
-
 #include <iostream>
-#include <stdio.h>
 
-class Polynomial {
-	friend std::ostream& operator<<(std::ostream&, const Polynomial&);
-	friend std::istream& operator>>(std::istream&, const Polynomial&);
+/**
+ * CSS 342: Mathematics in Computing
+ * Polynomial.h
+ * Class:	Polynomial
+ * Purpose:	Data structure representing a polynomial function in mathematics.
+ *			The index of the array is the power, and the value is the constant.
+ *			This class allows the user to add, subtract, multiply, and divide
+ *			polynomials using an arbitrary driver.
+ * 
+ * @author Alvaro Licea, Jr.
+ * @version 10/8/2015
+ */
+class Polynomial
+{
+	friend ostream& operator<<(ostream$ os, const Polynomial& poly);
+	friend istream& operator>>(istream& is, const Polynomial& poly);
+
 public:
-	static const int DEFAULT_EXPONENT_SIZE = 0;
-	static const int DEFAULT_LENGTH = 1;
-	static const int DEFAULT_VALUE = 0;
-
-	Polynomial();
-	~Polynomial();
-
-	int highest_degree() const;
-	int length() const;
-
-	Polynomial operator+(const Polynomial&) const;
-	Polynomial operator-(const Polynomial&) const;
-	Polynomial operator*(const Polynomial&) const;
-	Polynomial operator/(const Polynomial&) const;
+	int length()
+	Polynomial operator+(const Polynomial&);
+	Polynomial operator-(const Polynomial&);
+	Polynomial operator*(const Polynomial&);
+	Polynomial operator/(const Polynomial&);
 
 	Polynomial operator+=(const Polynomial&);
 	Polynomial operator-=(const Polynomial&);
 	Polynomial operator*=(const Polynomial&);
 	Polynomial operator/=(const Polynomial&);
 
-	bool operator==(const Polynomial&) const;
-	bool operator!=(const Polynomial&) const;
+	Polynomial operator==(const Polynomial&) const;
+	Polynomial operator!=(const Polynomial&) const;
 
-protected: 
-	int* poly;
-	int degree;
-	int arr_length;
-};
-
-#endif
+protected:
+	int* poly_array;
+	int length;
+}
+#endif // !POLYNOMIAL_H
