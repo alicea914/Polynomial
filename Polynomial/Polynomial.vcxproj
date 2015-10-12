@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{496B478F-C12D-4463-860B-6D3FDA937F7B}</ProjectGuid>
+    <ProjectGuid>{62EBF9EE-45E1-4E87-871A-17DAB469AF2C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Polynomial</RootNamespace>
   </PropertyGroup>
@@ -78,7 +78,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Polynomial.h" />
+    <ClInclude Include="polynomial.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="polynomial.cpp" />
+    <ClCompile Include="poly_tests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
