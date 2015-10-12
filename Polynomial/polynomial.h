@@ -1,6 +1,7 @@
 #ifndef POLYNOMIAL_H
 #define POLYNOMIAL_H
 #include <iostream>
+#include <stdio.h>
 
 /**
  * CSS 342: Mathematics in Computing
@@ -16,26 +17,29 @@
  */
 class Polynomial
 {
-	friend ostream& operator<<(ostream$ os, const Polynomial& poly);
-	friend istream& operator>>(istream& is, const Polynomial& poly);
+	friend std::ostream& operator<<(std::ostream& os, const Polynomial& poly);
+	friend std::istream& operator>>(std::istream& is, const Polynomial& poly);
 
 public:
-	int length()
-	Polynomial operator+(const Polynomial&);
-	Polynomial operator-(const Polynomial&);
-	Polynomial operator*(const Polynomial&);
-	Polynomial operator/(const Polynomial&);
+	static const int DEFAULT_EXPONENT_SIZE = 0;
+	static const int DEFAULT_LENGTH = 1;
+	static const int DEFAULT_VALUE = 0;
 
-	Polynomial operator+=(const Polynomial&);
-	Polynomial operator-=(const Polynomial&);
-	Polynomial operator*=(const Polynomial&);
-	Polynomial operator/=(const Polynomial&);
+	Polynomial();
+	~Polynomial();
 
-	Polynomial operator==(const Polynomial&) const;
-	Polynomial operator!=(const Polynomial&) const;
+	int highest_degree() const;
+	int length() const;
 
-protected:
-	int* poly_array;
-	int length;
-}
+	Polynomial operator+(const Polynomial&) const;
+	Polynomial operator-(const Polynomial&) const;
+	Polynomial operator*(const Polynomial&) const;
+	Polynomial operator/(const Polynomial&) const;
+
+protected: 
+	int* poly;
+	int degree;
+	int arr_length;
+};
+
 #endif // !POLYNOMIAL_H
