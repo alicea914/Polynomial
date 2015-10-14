@@ -1,3 +1,4 @@
+//-----------------------------------------------------------------------------
 #include "polynomial.h"
 
 Polynomial::Polynomial() {
@@ -54,3 +55,4 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
 	}
 	return os;
 }
+//-----------------------------------------------------------------------------
