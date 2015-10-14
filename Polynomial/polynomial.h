@@ -1,3 +1,4 @@
+//-----------------------------------------------------------------------------
 #ifndef POLYNOMIAL_H
 #define POLYNOMIAL_H
 #include <iostream>
@@ -7,7 +8,7 @@
  * Polynomial.h
  * Class:	Polynomial
  * Purpose:	Data structure representing a polynomial function in mathematics.
- *			The index of the array is the power, and the value is the constant.
+ *			The array index is the power, and the value is the constant.
  *			This class allows the user to add, subtract, multiply, and divide
  *			polynomials using an arbitrary driver.
  * 
@@ -53,3 +54,4 @@ protected:
 	int* get_poly_arr() const;
 };
 #endif // !POLYNOMIAL_H
+//-----------------------------------------------------------------------------
