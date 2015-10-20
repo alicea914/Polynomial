@@ -58,4 +58,9 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
 
   return os;
 }
+
+std::istream& operator>>(std::istream& is, const Polynomial& poly) {
+  std::cout << "Working on it\n";
+  return is;
+}
 //-----------------------------------------------------------------------------
