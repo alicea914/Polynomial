@@ -30,8 +30,41 @@ int* Polynomial::get_poly_arr() const {
   return poly;
 }
 
-bool Polynomial::set_poly(std::vector<int> container) {
+bool Polynomial::set_poly(const std::vector<int> data) {
+  if(data.empty()) {
+    std::cout << "Container is empty: nothing to set\n";
+    return true;
+  }
+  
+  int temp_size = -1;
+ 
+  if((temp_size = poly_size_from_vector(data)) == -1) 
+    return false;
+  this->degree = temp_size - 1;
+  this->arr_length = temp_size;
+  
+  std::cout << "ERROR: set_poly did something bad\n";
   return false;
+}
+
+int Polynomial::poly_size_from_vector(std::vector<int> v)  const {
+  if(v.size() < 2) {
+    return 0;
+  }
+  int largest = INT_MIN;
+
+  // data from user input: <const> <expo> <const> <expo> ...
+  // start at first exponent element and check every exponent
+  // assign largest exponent to return variable
+  for(int i = 1; i < v.size(); i+=2) {
+    if(v[i] > largest) 
+      largest = v[i];
+  }
+
+  if(largest == INT_MIN)
+    largest = 0;
+
+  return largest;
 }
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
@@ -43,12 +76,11 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
       return (os << "0");
     }
     
-    // initialize pointer and format output
     int* current = poly.get_poly_arr();
     int highest_degree = poly.highest_degree();
     os << current[highest_degree] << "x^" << highest_degree;
 		
-    // loop from end of poly to beginning, and format output	
+    // loop from end of poly to beginning and format output	
     for (int degree = poly.highest_degree()- 1; degree >= 0; degree--) {
       if (current[degree] == 0) {
         continue;
@@ -63,12 +95,11 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
       }
     }
   }
-
   return os;
 }
 
 std::istream& operator>>(std::istream& is, Polynomial& poly) {
-   std::cout << "Please enter input like below:\n";
+  std::cout << "Please enter input like below:\n";
   std::cout << "<const> <exp> (0 0 to quit)\n";
   std::cout << "<const> <exp> (0 0 to quit)\n";
   std::cout << "\t...\n";
