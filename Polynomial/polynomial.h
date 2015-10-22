@@ -2,6 +2,7 @@
 #ifndef POLYNOMIAL_H
 #define POLYNOMIAL_H
 #include <iostream>
+#include <climits>
 #include <vector>
 
 /**
@@ -31,7 +32,7 @@ public:
   int highest_degree() const;
   bool is_zero() const;  
   int length() const;
-  bool set_poly(std::vector<int>);
+  bool set_poly(const std::vector<int>);
 
   Polynomial();
   ~Polynomial();
@@ -55,6 +56,7 @@ protected:
   int arr_length;
   bool zero; 
   int* get_poly_arr() const;
+  int poly_size_from_vector(const std::vector<int>) const;
 };
 #endif // !POLYNOMIAL_H
 //-----------------------------------------------------------------------------
