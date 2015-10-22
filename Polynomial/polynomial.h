@@ -2,6 +2,7 @@
 #ifndef POLYNOMIAL_H
 #define POLYNOMIAL_H
 #include <iostream>
+#include <vector>
 
 /**
  * CSS 342: Mathematics & Computing
@@ -18,7 +19,7 @@
 class Polynomial
 {
   friend std::ostream& operator<<(std::ostream&, const Polynomial&);
-  friend std::istream& operator>>(std::istream&, const Polynomial&);
+  friend std::istream& operator>>(std::istream&, Polynomial&);
 
 public:
 
@@ -26,9 +27,11 @@ public:
   static const int DEFAULT_EXPONENT_SIZE = 0;
   static const int DEFAULT_VALUE = 0;
 
-  bool is_zero() const;
+  
   int highest_degree() const;
+  bool is_zero() const;  
   int length() const;
+  bool set_poly(std::vector<int>);
 
   Polynomial();
   ~Polynomial();
