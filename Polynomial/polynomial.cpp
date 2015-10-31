@@ -15,12 +15,14 @@ Polynomial::~Polynomial() {
 }
 
 bool Polynomial::is_zero() const {
-  return zero;	
+  return zero;
 }
-
+void Polynomial::set_zero(const bool z) {
+  zero = z;
+}
 int Polynomial::highest_degree() const {
   return degree;
-} 
+}
 
 int Polynomial::length() const {
   return arr_length;
@@ -31,20 +33,55 @@ int* Polynomial::get_poly_arr() const {
 }
 
 bool Polynomial::set_poly(const std::vector<int> data) {
+  /**
+    * Display contents of data
+   */
+
+   for(std::vector<int>::const_iterator i = data.begin(); i != data.end(); ++i)
+     std::cout << *i << " ";
+
+  std::cout << "\n";
+  //*/
   if(data.empty()) {
     std::cout << "Container is empty: nothing to set\n";
     return true;
   }
-  
+
   int temp_size = -1;
- 
-  if((temp_size = poly_size_from_vector(data)) == -1) 
+
+  if((temp_size = poly_size_from_vector(data)) == -1) {
     return false;
-  this->degree = temp_size - 1;
-  this->arr_length = temp_size;
-  
-  std::cout << "ERROR: set_poly did something bad\n";
-  return false;
+  }
+
+  this->degree = temp_size;
+  this->arr_length = temp_size + 1;
+
+  if(poly != NULL) {
+    delete[] poly;
+  }
+
+  poly = new int[arr_length];
+  for(int i = 0; i < arr_length; i++) {
+    poly[i] = 0;
+  }
+  int temp_const;
+  int temp_exp;
+  int i = 0;
+
+  std::cout << "length: " << arr_length << std::endl;
+  while(i < data.size() ) {
+    temp_const = data[i];
+    temp_exp = data[i+1];
+    std::cout << "c e i\n" << temp_const << " " << temp_exp << " " << i << std::endl;
+    poly[temp_exp] = temp_const;
+    i+=2;
+  }
+
+  for(int i = 0; i < arr_length; i++) {
+    if(poly[i] != 0) std::cout << i << " " << poly[i] << " ";
+  }
+  set_zero(false);
+  return true;
 }
 
 int Polynomial::poly_size_from_vector(std::vector<int> v)  const {
@@ -56,9 +93,9 @@ int Polynomial::poly_size_from_vector(std::vector<int> v)  const {
   // data from user input: <const> <expo> <const> <expo> ...
   // start at first exponent element and check every exponent
   // assign largest exponent to return variable
-  for(int i = 1; i < v.size(); i+=2) {
-    if(v[i] > largest) 
-      largest = v[i];
+  for(int i = 0; i < v.size(); i+=2) {
+    if(v[i+1] > largest)
+      largest = v[i+1];
   }
 
   if(largest == INT_MIN)
@@ -67,20 +104,23 @@ int Polynomial::poly_size_from_vector(std::vector<int> v)  const {
   return largest;
 }
 
+
 std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
   // ERROR if NULL, otherwise display 0 if polynomial is zero
   if(poly.get_poly_arr() == NULL) {
-    return (os << "ERROR: Polynomial array is NULL\n");		
-  } else {
-    if(poly.is_zero()) {
-      return (os << "0");
-    }
-    
+    return (os << "ERROR: Polynomial array is NULL\n");
+  }
+  if(poly.is_zero()) {
+    return (os << "0");
+
+
     int* current = poly.get_poly_arr();
+
+    return (os << "test: " << current[1]);
     int highest_degree = poly.highest_degree();
     os << current[highest_degree] << "x^" << highest_degree;
-		
-    // loop from end of poly to beginning and format output	
+
+    // loop from end of poly to beginning and format output
     for (int degree = poly.highest_degree()- 1; degree >= 0; degree--) {
       if (current[degree] == 0) {
         continue;
@@ -107,7 +147,7 @@ std::istream& operator>>(std::istream& is, Polynomial& poly) {
   std::vector<int> container;
   int constant = 0;
   int exponent = 0;
-  
+
   // used to get the loops started
   is >> constant >> exponent;
 
@@ -125,18 +165,19 @@ std::istream& operator>>(std::istream& is, Polynomial& poly) {
 
     // stop if input is 0 0, otherwise add to vector, and read in again
     if(constant == 0 && exponent == 0)
-      break;  
+      break;
     else {
       container.push_back(constant);
       container.push_back(exponent);
     }
 
     // read again
-    is >> constant >> exponent;           
+    is >> constant >> exponent;
   }
-  
+
   // 0 0 is entered, set up the polynomial
   poly.set_poly(container);
+  poly.set_zero(false);
   return is;
 }
 //-----------------------------------------------------------------------------

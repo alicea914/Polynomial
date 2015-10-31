@@ -13,7 +13,7 @@
  *		The array index is the power, and the value is the constant.
  *		This class allows the user to add, subtract, multiply, and
  * 		divide polynomials using an arbitrary  *driver.
- * 
+ *
  * @author Alvaro Licea, Jr.
  * @version 10/8/2015
  */
@@ -28,9 +28,10 @@ public:
   static const int DEFAULT_EXPONENT_SIZE = 0;
   static const int DEFAULT_VALUE = 0;
 
-  
+
   int highest_degree() const;
-  bool is_zero() const;  
+  bool is_zero() const;
+  void set_zero(const bool);
   int length() const;
   bool set_poly(const std::vector<int>);
 
@@ -54,7 +55,7 @@ protected:
   int* poly;
   int degree;
   int arr_length;
-  bool zero; 
+  bool zero;
   int* get_poly_arr() const;
   int poly_size_from_vector(const std::vector<int>) const;
 };
