@@ -1,9 +1,17 @@
 //-----------------------------------------------------------------------------
 #include "polynomial.h"
 
-int main() 
+/**
+ * CSS 342: Mathematics & Computing
+ * poly_tests.cpp
+ * Description: Driver for testing polynomial functionality.
+ * @author Alvaro Licea, Jr.
+ * @version 10/8/2015
+ */
+
+int main()
 {
-  //Test objects. 
+  //Test objects.
   Polynomial* polynomial_array = new Polynomial[20];
   Polynomial a;
   Polynomial b;
@@ -22,7 +30,7 @@ int main()
   std::cout << "---------------------------------------";
   std::cout << "----------------------------------------\n";
   std::cin  >> b;
-  std::cout << "This is b Poly:\t\t\t" << a << "\n";
+  std::cout << "This is b Poly:\t\t\t" << b << "\n";
 
   // test the accessors
   std::cout << "\nTesting accessors...\n";
@@ -31,19 +39,19 @@ int main()
   std::cout << "a Poly\n";
   std::cout << "The highest degree of this polynomial is:\t"
             << a.highest_degree() << "\n";
-  std::cout << "The length of the polynomial array is:\t\t" 
+  std::cout << "The length of the polynomial array is:\t\t"
             << a.length() << "\n";
-  std::cout << "Is this polynomial a zero polynomial?\t\t" 
+  std::cout << "Is this polynomial a zero polynomial?\t\t"
             << a.is_zero() << "\n";
-  
+
   std::cout << "---------------------------------------";
   std::cout << "----------------------------------------\n";
   std::cout << "b Poly\n";
   std::cout << "The highest degree of this polynomial is:\t"
             << b.highest_degree() << "\n";
-  std::cout << "The length of the polynomial array is:\t\t" 
+  std::cout << "The length of the polynomial array is:\t\t"
             << b.length() << "\n";
-  std::cout << "Is this polynomial a zero polynomial?\t\t" 
+  std::cout << "Is this polynomial a zero polynomial?\t\t"
             << b.is_zero() << "\n";
 }
 //-----------------------------------------------------------------------------
