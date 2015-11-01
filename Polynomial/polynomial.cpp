@@ -64,22 +64,16 @@ bool Polynomial::set_poly(const std::vector<int> data) {
   for(int i = 0; i < arr_length; i++) {
     poly[i] = 0;
   }
-  int temp_const;
-  int temp_exp;
-  int i = 0;
+  int temp_const, temp_exp, i = 0;
 
-  std::cout << "length: " << arr_length << std::endl;
+  //std::cout << "length: " << arr_length << std::endl;
   while(i < data.size() ) {
     temp_const = data[i];
     temp_exp = data[i+1];
-    std::cout << "c e i\n" << temp_const << " " << temp_exp << " " << i << std::endl;
     poly[temp_exp] = temp_const;
     i+=2;
   }
 
-  for(int i = 0; i < arr_length; i++) {
-    if(poly[i] != 0) std::cout << i << " " << poly[i] << " ";
-  }
   set_zero(false);
   return true;
 }
@@ -106,38 +100,68 @@ int Polynomial::poly_size_from_vector(std::vector<int> v)  const {
 
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
-  // ERROR if NULL, otherwise display 0 if polynomial is zero
   if(poly.get_poly_arr() == NULL) {
     return (os << "ERROR: Polynomial array is NULL\n");
   }
   if(poly.is_zero()) {
     return (os << "0");
-
-
-    int* current = poly.get_poly_arr();
-
-    return (os << "test: " << current[1]);
-    int highest_degree = poly.highest_degree();
-    os << current[highest_degree] << "x^" << highest_degree;
-
-    // loop from end of poly to beginning and format output
-    for (int degree = poly.highest_degree()- 1; degree >= 0; degree--) {
-      if (current[degree] == 0) {
-        continue;
-      } else if (current[highest_degree] == 1) {
-        os << "x^" << degree << " ";
-      } else if(current[degree] > 1) {
-        os << "+" << current[degree] << "x^" << degree << " ";
-      } else if (current[degree] < 0) {
-        os << current[degree] << "x^" << degree << " ";
-      } else {
-        os << "x^" << degree << " ";
-      }
-    }
   }
-  return os;
+  return (os << poly.print());
 }
 
+std::string Polynomial::print() const {
+  // set up stream to hold formatted output
+  std::stringstream retVal;
+
+  // if the polynomial is zero, we're done
+  if(is_zero()) {
+    retVal << "0";
+    return retVal.str();
+  }
+
+  // format largest degree first
+  int biggest = highest_degree();
+  retVal << poly[biggest] << "x^" << biggest << " ";
+
+  // loop from end of poly to beginning and format to Cx^n
+  // where C is the constant, and n is the exponent from poly
+  for (int d = degree - 1; d >= 0; d--) {
+    if (d == 0) {
+      if (poly[d] > 0)
+        retVal << "+ " << poly[d] << " ";
+      else if (poly[d] < 0)
+        retVal << poly[d] << " ";
+      else
+        continue;
+    }
+    // mathematicians dislike seeing 1 * varable
+    if (d == 1) {
+      if (poly[d] == 1)
+        retVal << "+ x ";
+      else if (poly[d] > 1)
+        retVal << "+ " << poly[d] << "x ";
+      else if (poly[d] < 0)
+        retVal << poly[d] << "x ";
+      else
+        continue;
+    }
+
+    else if (poly[d] == 1) {
+      retVal << "+ x^" << d << " ";
+    }
+
+    else if (poly[d] > 1) {
+      retVal << "+ " << poly[d] << "x^" << d << " ";
+    }
+    // 1 * variable hack here, too
+    else if (poly[d] < 0) {
+      if(d != 1)
+        retVal << poly[d] << "x^" << d << " ";
+    }
+  }
+
+return retVal.str();
+}
 std::istream& operator>>(std::istream& is, Polynomial& poly) {
   std::cout << "Please enter input like below:\n";
   std::cout << "<const> <exp> (0 0 to quit)\n";

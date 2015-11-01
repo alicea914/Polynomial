@@ -4,6 +4,8 @@
 #include <iostream>
 #include <climits>
 #include <vector>
+#include <string>
+#include <sstream>
 
 /**
  * CSS 342: Mathematics & Computing
@@ -33,6 +35,7 @@ public:
   bool is_zero() const;
   void set_zero(const bool);
   int length() const;
+  std::string print() const;
   bool set_poly(const std::vector<int>);
 
   Polynomial();
