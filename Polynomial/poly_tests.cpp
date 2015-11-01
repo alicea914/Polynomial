@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
 #include "polynomial.h"
+#include <cstdlib>
+#include <vector>
 
 /**
  * CSS 342: Mathematics & Computing
@@ -12,10 +14,30 @@
 int main()
 {
   //Test objects.
-  Polynomial* polynomial_array = new Polynomial[20];
+  int length = 5;
+  std::vector<Polynomial> polys;
   Polynomial a;
   Polynomial b;
 
+  srand(time(NULL));
+
+  int i = 0, k = 0;
+  Polynomial* temp;
+  for (int a = 0; a < length - 1; a++) {
+    i = rand() % 100 + 1;
+    //std::cout << i << " " << k << std::endl;
+    k = rand() % 100;
+
+    temp = new Polynomial(i, k);
+
+    //std::cout << *temp << std::endl;
+
+    polys.push_back(*temp);
+
+    std::cout << polys[a] << std::endl;
+  }
+
+/*
   std::cout << "~*~*~*~*__Polynomial Tests__*~*~*~*~\n";
   std::cout << "Written by Alvaro Licea, Jr.\n";
 
@@ -53,5 +75,7 @@ int main()
             << b.length() << "\n";
   std::cout << "Is this polynomial a zero polynomial?\t\t"
             << b.is_zero() << "\n";
+*/
+
 }
 //-----------------------------------------------------------------------------

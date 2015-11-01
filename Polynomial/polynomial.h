@@ -39,6 +39,7 @@ public:
   bool set_poly(const std::vector<int>);
 
   Polynomial();
+  Polynomial(int c, int e);
   ~Polynomial();
 
   Polynomial operator+(const Polynomial&);

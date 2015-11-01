@@ -10,16 +10,30 @@ Polynomial::Polynomial() {
 }
 
 Polynomial::~Polynomial() {
-  if(poly != NULL)
+  std::cout << "heeheehooho" << is_zero() ;
+  if(this != NULL && poly != NULL)
     delete[] poly;
+}
+
+Polynomial::Polynomial(int c, int e) {
+  degree = e;
+  arr_length = degree + 1;
+  poly = new int[arr_length];
+
+  for(int i = 0; i < arr_length; i++) {
+    poly[i] = DEFAULT_VALUE;
+  }
+  poly[e] = c;
 }
 
 bool Polynomial::is_zero() const {
   return zero;
 }
+
 void Polynomial::set_zero(const bool z) {
   zero = z;
 }
+
 int Polynomial::highest_degree() const {
   return degree;
 }
@@ -66,7 +80,6 @@ bool Polynomial::set_poly(const std::vector<int> data) {
   }
   int temp_const, temp_exp, i = 0;
 
-  //std::cout << "length: " << arr_length << std::endl;
   while(i < data.size() ) {
     temp_const = data[i];
     temp_exp = data[i+1];
